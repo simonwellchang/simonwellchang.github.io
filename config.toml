@@ -1,0 +1,54 @@
+baseURL = "https://simonwell.pw/"
+languageCode = "en-us"
+title = "Simon's Study Notes"
+theme = "hugo-nuo"
+enableRobotsTXT = true
+PygmentsCodeFences = true
+canonifyurls = true
+
+# Disqus Username
+disqusShortname = "Simon"
+
+# Google Analytics UA number
+googleAnalytics = "UA-140652958-1"
+
+# Copyright of your post
+copyright = "© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce."
+
+# Initial site menu, you can extend menu with content.
+[[menu.main]]
+  name = "首頁"
+  weight = 10
+  identifier = "home"
+  url = "/"
+
+[[menu.main]]
+  name = "作品"
+  weight = 20
+  identifier = "works"
+  url = "https://github.com/simonwellchang"
+
+[[menu.main]]
+  name = "標籤"
+  weight = 30
+  identifier = "tags"
+  url = "/tags/"
+
+# Add your own params here
+[params]
+  author = "SimonWell"
+  bg = ""
+  avatar = "images/avatar.png"
+  seotitle = "Simon Study Notes"
+  subtitle = "~ Make a small step every day and make a big step forward in the future ~"
+  description = "Simon's Study Notes"
+  paginate = 10
+
+  # Choose your social networks
+  email = "simonwell.ios@gmail.com"
+  github = "simonwellchang"
+
+  # Google Webmaster
+  # https://www.google.com/webmasters/
+  googleSiteVerification = "Sjn7Xm5PLtBOKGg24G6nL-QJaj9WP2eOYHofg2bSeyM"
+
