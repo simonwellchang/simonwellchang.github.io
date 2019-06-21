@@ -1,0 +1,6 @@
+framework module SWTest0 {
+  umbrella header "SWTest0-umbrella.h"
+
+  export *
+  module * { export * }
+}

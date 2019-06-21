@@ -1,0 +1,27 @@
+PODS:
+  - Alamofire (4.8.2)
+  - SwiftyJSON (5.0.0)
+  - SWTest0 (0.1.0):
+    - Alamofire
+    - SwiftyJSON
+
+DEPENDENCIES:
+  - SWTest0 (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - SwiftyJSON
+
+EXTERNAL SOURCES:
+  SWTest0:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  SWTest0: e52b6c5a8bfdd20ad7e9864b9558cb30dffb3232
+
+PODFILE CHECKSUM: 6ecbbf357a83bdff0041f294664d0850dcc5cbb0
+
+COCOAPODS: 1.7.1
