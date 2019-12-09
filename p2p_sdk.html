@@ -34,7 +34,7 @@
 </head>
 
 <body>
-    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true" style="position: relative;"><h1 id="P2P接入文檔說明文件-V01"><a class="anchor hidden-xs" href="#P2P接入文檔說明文件-V01" title="P2P接入文檔說明文件-V01"><span class="octicon octicon-link"></span></a>P2P接入文檔說明文件 V0.1</h1><h2 id="iOS-SDK-概述"><a class="anchor hidden-xs" href="#iOS-SDK-概述" title="iOS-SDK-概述"><span class="octicon octicon-link"></span></a>iOS SDK 概述</h2><p><a href="https://i.imgur.com/5gaXOsz.jpg" title="P2P_SDK" target="_blank" rel="noopener"><img src="https://i.imgur.com/5gaXOsz.jpg" alt="P2P_SDK" title="P2P_SDK"></a></p><p>從上圖可以修剪，P2P SDK包括2個部分，本地HTTP Server，與P2P接口。綠色部分是播放器通過本地HTTP Server請求本地視頻資源，紅色部分是P2P點對點接口進行資源下載與上傳（需 透過資源服務器發布的資源網址），由P2P下載視頻資源至本地存儲空間。再由播放器向HTTP Server請求的視頻資源，達到資源下載的同時可即時播放視頻。</p><h2 id="iOS-SDK-集成指南"><a class="anchor hidden-xs" href="#iOS-SDK-集成指南" title="iOS-SDK-集成指南"><span class="octicon octicon-link"></span></a>iOS SDK 集成指南</h2><h3 id="SDK-說明"><a class="anchor hidden-xs" href="#SDK-說明" title="SDK-說明"><span class="octicon octicon-link"></span></a>SDK 說明</h3><h4 id="資源文件"><a class="anchor hidden-xs" href="#資源文件" title="資源文件"><span class="octicon octicon-link"></span></a>資源文件</h4><p>包名為 libs-{版本号}-sdk-ios-full.zip 例如:libs-v.1.8.18.26-sdk-ios-full.zip<br>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="P2P接入文檔說明文件-V01"><a class="anchor hidden-xs" href="#P2P接入文檔說明文件-V01" title="P2P接入文檔說明文件-V01"><span class="octicon octicon-link"></span></a>P2P接入文檔說明文件 V0.1</h1><h2 id="iOS-SDK-概述"><a class="anchor hidden-xs" href="#iOS-SDK-概述" title="iOS-SDK-概述"><span class="octicon octicon-link"></span></a>iOS SDK 概述</h2><p><a href="https://i.imgur.com/5gaXOsz.jpg" title="P2P_SDK" target="_blank" rel="noopener"><img src="https://i.imgur.com/5gaXOsz.jpg" alt="P2P_SDK" title="P2P_SDK"></a></p><p>從上圖可以修剪，P2P SDK包括2個部分，本地HTTP Server，與P2P接口。綠色部分是播放器通過本地HTTP Server請求本地視頻資源，紅色部分是P2P點對點接口進行資源下載與上傳（需 透過資源服務器發布的資源網址），由P2P下載視頻資源至本地存儲空間。再由播放器向HTTP Server請求的視頻資源，達到資源下載的同時可即時播放視頻。</p><h2 id="iOS-SDK-集成指南"><a class="anchor hidden-xs" href="#iOS-SDK-集成指南" title="iOS-SDK-集成指南"><span class="octicon octicon-link"></span></a>iOS SDK 集成指南</h2><h3 id="SDK-說明"><a class="anchor hidden-xs" href="#SDK-說明" title="SDK-說明"><span class="octicon octicon-link"></span></a>SDK 說明</h3><h4 id="資源文件"><a class="anchor hidden-xs" href="#資源文件" title="資源文件"><span class="octicon octicon-link"></span></a>資源文件</h4><p>包名為 libs-{版本号}-sdk-ios-full.zip 例如:libs-v.1.8.18.26-sdk-ios-full.zip<br>
 解壓縮後產生libp2p.framework，包含以下目錄或檔案：</p><ol>
 <li><code>_CodeSignature 目錄：mac自動產生的文件</code></li>
 <li><code>Headers 目錄：主要頭文件</code></li>
@@ -50,26 +50,23 @@
 </ul><h4 id="啟動p2p服務"><a class="anchor hidden-xs" href="#啟動p2p服務" title="啟動p2p服務"><span class="octicon octicon-link"></span></a>啟動p2p服務</h4><p>在以下function添加此code</p><pre><code class="objective-c hljs">- (BOOL)application:(UIApplication*)applicationdidFinishLaunchingWithOptions:(nullable NSDictionary&lt;UIApplicationLaunchOptionsKey, id&gt; *)launchOptions {
 
   NSString *dir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-
-  NSString * keyStr = <span class="hljs-string">@"APP KEY"</span>;
-  <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * key = [keyStr UTF8String];
-  <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* szdir = [dir UTF8String];
+  NSString *keyStr = <span class="hljs-string">@"APP KEY"</span>;
+  <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *key = [keyStr UTF8String];
+  <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *szdir = [dir UTF8String];
   <span class="hljs-keyword">int</span> http_port = doxstarthttpd((<span class="hljs-keyword">char</span>*)key,(<span class="hljs-keyword">char</span>*)szdir );
   doxsetloglevel(<span class="hljs-number">0</span>);
 }
-</code></pre><h4 id="下載P2P檔案"><a class="anchor hidden-xs" href="#下載P2P檔案" title="下載P2P檔案"><span class="octicon octicon-link"></span></a>下載P2P檔案</h4><pre><code class="objective-c hljs">NSStringEncoding gbkEncoding =  CFStringConvertEncodingToNSStringEncoding (kCFStringEncodingGB_18030_2000);
-
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* url =  [url cStringUsingEncoding:gbkEncoding]
-doxadd(url)
+</code></pre><h4 id="下載P2P檔案"><a class="anchor hidden-xs" href="#下載P2P檔案" title="下載P2P檔案"><span class="octicon octicon-link"></span></a>下載P2P檔案</h4><pre><code class="objective-c hljs">NSStringEncoding gbkEncoding = CFStringConvertEncodingToNSStringEncoding (kCFStringEncodingGB_18030_2000);
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *url = [url cStringUsingEncoding:gbkEncoding];
+doxadd(url);
 
 dispatch_group_t <span class="hljs-keyword">group</span> = dispatch_group_create();       
 dispatch_group_async(<span class="hljs-keyword">group</span>, dispatch_get_global_queue(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), ^{
   <span class="hljs-keyword">int</span> videoId = doxdownload(url);
 });
-</code></pre><h4 id="播放P2P視頻"><a class="anchor hidden-xs" href="#播放P2P視頻" title="播放P2P視頻"><span class="octicon octicon-link"></span></a>播放P2P視頻</h4><pre><code class="objective-c hljs"><span class="hljs-symbol">NSString</span> *urlString = @”ftp://xxxx/xxxxx/xxxxx.mp4”;
+</code></pre><h4 id="播放P2P視頻"><a class="anchor hidden-xs" href="#播放P2P視頻" title="播放P2P視頻"><span class="octicon octicon-link"></span></a>播放P2P視頻</h4><pre><code class="objective-c hljs"><span class="hljs-symbol">NSString</span> *urlString = @<span class="hljs-string">"ftp://xxxx/xxxxx/xxxxx.mp4"</span>;
 
 dispatch_group_t group = dispatch_group_create();
-
 dispatch_group_async(group, dispatch_get_global_queue(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), ^{
   int p2pVid = [p2papi doxstart:urlString];
 });
@@ -182,7 +179,7 @@ ijkplayr.assetURL = url;
 <li>t : 視頻的隊列 ID</li>
 </ul><hr><blockquote>
 <p>getfilesize（int t）</p>
-</blockquote><p><code>获取视频档案大小</code></p><p><strong>參數說明</strong></p><ul>
+</blockquote><p><code>獲取視頻檔案大小</code></p><p><strong>參數說明</strong></p><ul>
 <li>t : 視頻的隊列 ID</li>
 </ul><hr><blockquote>
 <p>int getpercent（int t）;</p>
@@ -207,9 +204,9 @@ ijkplayr.assetURL = url;
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
 <li class=""><a href="#P2P接入文檔說明文件-V01" title="P2P接入文檔說明文件 V0.1">P2P接入文檔說明文件 V0.1</a><ul class="nav">
-<li><a href="#iOS-SDK-概述" title="iOS SDK 概述">iOS SDK 概述</a></li>
+<li class=""><a href="#iOS-SDK-概述" title="iOS SDK 概述">iOS SDK 概述</a></li>
 <li class=""><a href="#iOS-SDK-集成指南" title="iOS SDK 集成指南">iOS SDK 集成指南</a><ul class="nav">
-<li><a href="#SDK-說明" title="SDK 說明">SDK 說明</a></li>
+<li class=""><a href="#SDK-說明" title="SDK 說明">SDK 說明</a></li>
 <li class=""><a href="#配置工程" title="配置工程">配置工程</a></li>
 </ul>
 </li>
@@ -224,9 +221,9 @@ ijkplayr.assetURL = url;
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
         <div class="toc"><ul class="nav">
 <li class=""><a href="#P2P接入文檔說明文件-V01" title="P2P接入文檔說明文件 V0.1">P2P接入文檔說明文件 V0.1</a><ul class="nav">
-<li><a href="#iOS-SDK-概述" title="iOS SDK 概述">iOS SDK 概述</a></li>
+<li class=""><a href="#iOS-SDK-概述" title="iOS SDK 概述">iOS SDK 概述</a></li>
 <li class=""><a href="#iOS-SDK-集成指南" title="iOS SDK 集成指南">iOS SDK 集成指南</a><ul class="nav">
-<li><a href="#SDK-說明" title="SDK 說明">SDK 說明</a></li>
+<li class=""><a href="#SDK-說明" title="SDK 說明">SDK 說明</a></li>
 <li class=""><a href="#配置工程" title="配置工程">配置工程</a></li>
 </ul>
 </li>
