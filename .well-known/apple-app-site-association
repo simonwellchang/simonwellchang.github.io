@@ -1,16 +1,24 @@
 {
-    "appclips": {
-        "apps": ["QKY7M4B369.com.gwpd.ww.app.Clip"]
+    "appclips":{
+        "apps":[
+            "QKY7M4B369.com.gwpd.ww.app.Clip"
+        ]
     },
-    "applinks":
-  {
-       "apps":[],
-       "details":
-       {
-            "G56F686B33.com.xh.bfhq":
-            {
-                 "paths":["*"]
+    "webcredentials":{
+        "apps":[
+            "QKY7M4B369.com.gwpd.03.app"
+        ]
+    },
+    "applinks":{
+        "apps":[
+
+        ],
+        "details":{
+            "G56F686B33.com.xh.bfhq":{
+                "paths":[
+                    "*"
+                ]
             }
-       }
-  }
+        }
+    }
 }
